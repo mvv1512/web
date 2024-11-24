@@ -1,0 +1,62 @@
+1. Select All Loan Records
+
+for $loan in doc("loan_data.xml")/loans/loan
+return $loan
+
+
+2. Select All Loan Amounts
+
+for $loan in doc("loan_data.xml")/loans/loan
+return $loan/loan_amount
+
+3. Select Loans with Amount Greater Than a Specific Value
+
+for $loan in doc("loan_data.xml")/loans/loan
+where $loan/loan_amount > 50000
+return $loan
+
+4. Select Loan by Applicant Name
+
+for $loan in doc("loan_data.xml")/loans/loan
+where $loan/applicant_name = "John Doe"
+return $loan
+
+5. Select Loan ID and Loan Amount for Each Loan
+
+for $loan in doc("loan_data.xml")/loans/loan
+return <loan_info>
+           <id>{$loan/id}</id>
+           <loan_amount>{$loan/loan_amount}</loan_amount>
+       </loan_info>
+
+
+6. Select Loans with Interest Rate Greater Than 5%
+
+for $loan in doc("loan_data.xml")/loans/loan
+where $loan/interest_rate > 5
+return $loan
+
+7. Select Loans Applied on a Specific Date
+
+for $loan in doc("loan_data.xml")/loans/loan
+where $loan/application_date = "2024-11-21"
+return $loan
+
+8. Calculate the Total Loan Amount
+
+let $total := sum(doc("loan_data.xml")/loans/loan/loan_amount)
+return <total_loan_amount>{$total}</total_loan_amount>
+
+9. Select Loan Applications with a Loan Term Less Than 15 Years
+
+for $loan in doc("loan_data.xml")/loans/loan
+where $loan/loan_term < 15
+return $loan
+
+10. Generate a List of Applicants and Their Loan Details
+for $loan in doc("loan_data.xml")/loans/loan
+return <loan_details>
+           <applicant_name>{$loan/applicant_name}</applicant_name>
+           <loan_amount>{$loan/loan_amount}</loan_amount>
+           <interest_rate>{$loan/interest_rate}</interest_rate>
+       </loan_details>
